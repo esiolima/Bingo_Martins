@@ -1,0 +1,17 @@
+# Sobe só o Postgres para desenvolvimento local.
+# Uso: docker compose -f docker-compose.dev.yml up -d
+# Depois: cp .env.example .env (ajuste se mudar usuário/senha) e `npm run dev`.
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: bingo
+      POSTGRES_USER: bingo
+      POSTGRES_PASSWORD: senha-local
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - bingo-db-dev:/var/lib/postgresql/data
+volumes:
+  bingo-db-dev:
